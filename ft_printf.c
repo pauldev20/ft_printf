@@ -6,13 +6,15 @@
 /*   By: pgeeser <pgeeser@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/25 16:19:52 by pgeeser           #+#    #+#             */
-/*   Updated: 2022/05/02 16:31:31 by pgeeser          ###   ########.fr       */
+/*   Updated: 2022/05/02 17:44:27 by pgeeser          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 #include "./libft/libft.h"
 #include <stdarg.h>
+
+#include <stdio.h>
 
 int	is_token(char c)
 {
@@ -25,11 +27,33 @@ int	is_token(char c)
 	return (0);
 }
 
-// 0000 0000 0000 0000 0000 0000 0000 0000 0000 0000 0000 0000 0000 0000 0000 0000
+// 0000 0000 0000 0000 0000 0000 0000 0000 0000 width width width width + space 0x
 long	parse_args(char **token, va_list *ptr)
 {
+	long	rtn;
+
+	rtn = 0;
 	while (!is_token((*token)[1]))
+	{
+		if ((*token)[1] == '#')
+			rtn += 0b0001 << 0;
+		if ((*token)[1] == ' ')
+			rtn += 0b0001 << 4;
+		if ((*token)[1] == '+')
+			rtn += 0b0001 << 8;
+		if ((*token)[1] == '0')
+			rtn += (long)0b0001 << 44;
+		if ((*token)[1] == '.')
+		{
+			(*token) += 2;
+			rtn += (long)ft_atoi(*token) << 12;
+			while (ft_isdigit(**token))
+				(*token)++;
+			(*token) -= 2;
+		}
 		(*token)++;
+	}
+	return (rtn);
 }
 
 int	parse_token(char **token, va_list *ptr)
@@ -46,13 +70,13 @@ int	parse_token(char **token, va_list *ptr)
 	else if ((*token)[1] == 'p')
 		i = putptr(va_arg(*ptr, void *));
 	else if ((*token)[1] == 'd' || (*token)[1] == 'i')
-		i = putnbr(va_arg(*ptr, int));
+		i = putnbr(va_arg(*ptr, int), args);
 	else if ((*token)[1] == 'u')
-		i = putnbr(va_arg(*ptr, unsigned int));
+		i = putnbr(va_arg(*ptr, unsigned int), args);
 	else if ((*token)[1] == 'x')
-		i = puthex(va_arg(*ptr, unsigned int), 'a');
+		i = puthex(va_arg(*ptr, unsigned int), 'a', args);
 	else if ((*token)[1] == 'X')
-		i = puthex(va_arg(*ptr, unsigned int), 'A');
+		i = puthex(va_arg(*ptr, unsigned int), 'A', args);
 	else if ((*token)[1] == '%')
 		i = ft_putchar('%');
 	(*token)++;

@@ -6,7 +6,7 @@
 /*   By: pgeeser <pgeeser@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/02 12:32:29 by pgeeser           #+#    #+#             */
-/*   Updated: 2022/05/02 16:28:06 by pgeeser          ###   ########.fr       */
+/*   Updated: 2022/05/02 17:45:35 by pgeeser          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ int	puthex(unsigned long long a, char begin, long args)
 	unsigned int	i;
 
 	i = 0;
-	if ((args >> 4 & 0b1111) == 1)
+	if ((args & 0b1111) == 1)
 		putstr("0x");
 	if (a > 1 && a >> 4 > 0)
 		i = puthex(a >> 4, begin, args >> 4 << 4);
@@ -50,23 +50,36 @@ int	putptr(void *ptr)
 	return (puthex((unsigned long long)ptr, 'a', 0) + 2);
 }
 
-int	putnbr(long long nb)
+int	putnbr(long long nb, long args)
 {
 	int		digits;
 	int		i;
 	int		v;
-	int		neg;
+	int		sign;
 	long	num;
 
 	i = 0;
-	neg = 0;
+	sign = 0;
+	digits = ft_digits_of_int(nb);
+	while ((args >> 12 & 0b1111111111111111) > 0)
+	{
+		if (((args >> 12 & 0b1111111111111111) - digits) > 0)
+		{
+			if ((args >> 44 & 0b1111) > 0)
+				ft_putchar('0');
+			else
+				ft_putchar(' ');
+		}
+		args -= 1L << 12;
+	}
+	if ((args >> 8 & 0b1111) == 1 && nb > 0)
+		ft_putchar('+');
 	if (nb < 0)
 	{
 		ft_putchar('-');
 		nb *= -1;
-		neg = 1;
+		sign = 1;
 	}
-	digits = ft_digits_of_int(nb);
 	while (i < digits)
 	{
 		num = nb;
@@ -75,5 +88,5 @@ int	putnbr(long long nb)
 			num /= 10;
 		ft_putchar((num % 10) + '0');
 	}
-	return (digits + neg);
+	return (digits + sign);
 }
