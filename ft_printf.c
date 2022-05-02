@@ -6,7 +6,7 @@
 /*   By: pgeeser <pgeeser@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/25 16:19:52 by pgeeser           #+#    #+#             */
-/*   Updated: 2022/05/02 12:38:14 by pgeeser          ###   ########.fr       */
+/*   Updated: 2022/05/02 16:31:31 by pgeeser          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,27 +14,47 @@
 #include "./libft/libft.h"
 #include <stdarg.h>
 
+int	is_token(char c)
+{
+	if (c == 'c' || c == 's' || c == 'p')
+		return (1);
+	else if (c == 'd' || c == 'i' || c == 'u')
+		return (1);
+	else if (c == 'x' || c == 'X' || c == '%')
+		return (1);
+	return (0);
+}
+
+// 0000 0000 0000 0000 0000 0000 0000 0000 0000 0000 0000 0000 0000 0000 0000 0000
+long	parse_args(char **token, va_list *ptr)
+{
+	while (!is_token((*token)[1]))
+		(*token)++;
+}
+
 int	parse_token(char **token, va_list *ptr)
 {
-	int	i;
+	int		i;
+	long	args;
 
 	i = 0;
+	args = parse_args(token, ptr);
 	if ((*token)[1] == 'c')
-		i = putchar((char)va_arg(*ptr, int));
+		i = ft_putchar((char)va_arg(*ptr, int));
 	else if ((*token)[1] == 's')
 		i = putstr(va_arg(*ptr, char *));
 	else if ((*token)[1] == 'p')
 		i = putptr(va_arg(*ptr, void *));
 	else if ((*token)[1] == 'd' || (*token)[1] == 'i')
-		i = ft_putnbr_fd(va_arg(*ptr, int), 1);
+		i = putnbr(va_arg(*ptr, int));
 	else if ((*token)[1] == 'u')
-		i = ft_putnbr_uns_fd(va_arg(*ptr, unsigned int), 1);
+		i = putnbr(va_arg(*ptr, unsigned int));
 	else if ((*token)[1] == 'x')
-		i = ft_puthex_fd(va_arg(*ptr, unsigned int), 1, 'a');
+		i = puthex(va_arg(*ptr, unsigned int), 'a');
 	else if ((*token)[1] == 'X')
-		i = ft_puthex_fd(va_arg(*ptr, unsigned int), 1, 'A');
+		i = puthex(va_arg(*ptr, unsigned int), 'A');
 	else if ((*token)[1] == '%')
-		i = ft_putchar_fd('%', 1);
+		i = ft_putchar('%');
 	(*token)++;
 	return (i);
 }

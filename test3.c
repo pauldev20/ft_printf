@@ -6,7 +6,7 @@
 /*   By: pgeeser <pgeeser@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/02 12:22:16 by pgeeser           #+#    #+#             */
-/*   Updated: 2022/05/02 12:30:52 by pgeeser          ###   ########.fr       */
+/*   Updated: 2022/05/02 16:24:03 by pgeeser          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,6 @@ int	main(void)
 	int	i;
 
 	i = 0b0101;
-
-	printf("HI:   %0.1d\n", 1023);
+	printf("HI:   %x\n", 42);
 	return (0);
 }
