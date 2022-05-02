@@ -6,7 +6,7 @@
 /*   By: pgeeser <pgeeser@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/06 15:59:22 by pgeeser           #+#    #+#             */
-/*   Updated: 2022/04/13 17:34:35 by pgeeser          ###   ########.fr       */
+/*   Updated: 2022/04/26 17:01:17 by pgeeser          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,10 +53,10 @@ char	**ft_split(char const *s, char c);
 char	*ft_itoa(int n);
 char	*ft_strmapi(char const *s, char (*f)(unsigned int, char));
 void	ft_striteri(char *s, void (*f)(unsigned int, char*));
-void	ft_putchar_fd(char c, int fd);
-void	ft_putstr_fd(char *s, int fd);
+int		ft_putchar_fd(char c, int fd);
+int		ft_putstr_fd(char *s, int fd);
 void	ft_putendl_fd(char *s, int fd);
-void	ft_putnbr_fd(int n, int fd);
+int		ft_putnbr_fd(long nb, int fd);
 
 /* Bonus */
 t_list	*ft_lstnew(void *content);
@@ -70,6 +70,9 @@ void	ft_lstiter(t_list *lst, void (*f)(void *));
 t_list	*ft_lstmap(t_list *lst, void *(*f)(void *), void (*del)(void *));
 
 /* Additional */
-int		ft_digits_of_int(long n);
+int		ft_digits_of_int(unsigned long long n);
+int		ft_puthex_fd(unsigned long long nb, int fd, char charbegin);
+int		ft_putptr_fd(void *ptr, int fd);
+int		ft_putnbr_uns_fd(unsigned long nb, int fd);
 
 #endif

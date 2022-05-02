@@ -6,26 +6,27 @@
 /*   By: pgeeser <pgeeser@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/05 13:39:17 by pgeeser           #+#    #+#             */
-/*   Updated: 2022/04/13 17:34:53 by pgeeser          ###   ########.fr       */
+/*   Updated: 2022/04/26 16:22:24 by pgeeser          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	ft_putnbr_fd(int n, int fd)
+int	ft_putnbr_fd(long nb, int fd)
 {
 	int		digits;
 	int		i;
 	int		v;
+	int		neg;
 	long	num;
-	long	nb;
 
 	i = 0;
-	nb = n;
-	if (n < 0)
+	neg = 0;
+	if (nb < 0)
 	{
 		ft_putchar_fd('-', fd);
 		nb *= -1;
+		neg = 1;
 	}
 	digits = ft_digits_of_int(nb);
 	while (i < digits)
@@ -36,4 +37,5 @@ void	ft_putnbr_fd(int n, int fd)
 			num /= 10;
 		ft_putchar_fd((num % 10) + '0', fd);
 	}
+	return (digits + neg);
 }
