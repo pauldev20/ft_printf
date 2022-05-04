@@ -6,7 +6,7 @@
 /*   By: pgeeser <pgeeser@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/06 15:59:22 by pgeeser           #+#    #+#             */
-/*   Updated: 2022/05/03 15:13:45 by pgeeser          ###   ########.fr       */
+/*   Updated: 2022/05/04 15:14:34 by pgeeser          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,5 +74,6 @@ int		ft_digits_of_int(long long n);
 int		ft_puthex_fd(unsigned long long nb, int fd, char charbegin);
 int		ft_putptr_fd(void *ptr, int fd);
 int		ft_putnbr_uns_fd(unsigned long nb, int fd);
+int		ft_digits_of_hex(unsigned long long n);
 
 #endif

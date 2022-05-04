@@ -6,7 +6,7 @@
 /*   By: pgeeser <pgeeser@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/25 16:19:52 by pgeeser           #+#    #+#             */
-/*   Updated: 2022/05/04 11:01:10 by pgeeser          ###   ########.fr       */
+/*   Updated: 2022/05/04 14:13:43 by pgeeser          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,38 +24,55 @@ int	is_token(char c)
 		return (1);
 	else if (c == 'x' || c == 'X' || c == '%')
 		return (1);
+	else if (c == '\0')
+		return (1);
 	return (0);
 }
 
-// 0000 0000 prec prec prec prec - 0? 0? width width width width + space 0x
-long	parse_args(char **token)
+t_args	init_args(void)
 {
-	long	rtn;
+	t_args	rtn;
 
-	rtn = 0;
+	rtn.minus = 0;
+	rtn.zero = 0;
+	rtn.prec = -1;
+	rtn.width = -1;
+	rtn.space = 0;
+	rtn.plus = 0;
+	rtn.tag = 0;
+	return (rtn);
+}
+
+t_args	parse_args(char **token)
+{
+	t_args	rtn;
+
+	rtn = init_args();
 	while (!is_token(**token))
 	{
 		if (**token == '#')
-			rtn += 0b0001 << 0;
+			rtn.tag = 1;
 		if (**token == ' ')
-			rtn += 0b0001 << 4;
+			rtn.space = 1;
 		if (**token == '+')
-			rtn += 0b0001 << 8;
-		if (**token == '0' && !(rtn >> 44 & 0b11111111))
-			rtn += (long)'0' << 44;
-		else if (!(rtn >> 44 & 0b11111111))
-			rtn += (long)' ' << 44;
+			rtn.plus = 1;
+		if (**token == '0' && !rtn.zero)
+			rtn.zero = '0';
+		else if (!rtn.zero)
+			rtn.zero = ' ';
 		if (**token == '-')
-			rtn += (long)0b0001 << 52;
+			rtn.minus = 1;
 		if (**token == '.')
 		{
-			rtn += (long)ft_atoi(*token + 1) << 56;
-			*token += ft_digits_of_int(ft_atoi(*token + 1));
+			rtn.prec = ft_atoi(*token + 1);
+			if (ft_atoi(*token + 1) > 0)
+				*token += ft_digits_of_int(ft_atoi(*token + 1));
 		}
 		else if (ft_isdigit(**token) && (**token != '0'))
 		{
-			rtn += (long)ft_atoi(*token) << 12;
-			*token += ft_digits_of_int(ft_atoi(*token)) - 1;
+			rtn.width = ft_atoi(*token);
+			if (ft_atoi(*token + 1) > 0)
+				*token += ft_digits_of_int(ft_atoi(*token + 1));
 		}
 		(*token)++;
 	}
@@ -65,7 +82,7 @@ long	parse_args(char **token)
 int	parse_token(char **token, va_list *ptr)
 {
 	int		i;
-	long	args;
+	t_args	args;
 
 	i = 0;
 	args = parse_args(token);

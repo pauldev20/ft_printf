@@ -1,24 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   test.c                                             :+:      :+:    :+:   */
+/*   test4.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: pgeeser <pgeeser@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/04/26 12:52:03 by pgeeser           #+#    #+#             */
-/*   Updated: 2022/05/04 17:46:51 by pgeeser          ###   ########.fr       */
+/*   Created: 2022/05/04 17:56:54 by pgeeser           #+#    #+#             */
+/*   Updated: 2022/05/04 18:00:59 by pgeeser          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_printf.h"
 #include <stdio.h>
-#include <limits.h>
+
+int	printnbr(long long nb, int prec, int plus, int space, int width, int minus)
+{
+	if (minus)
+	{
+
+	}
+	
+}
 
 int	main(void)
 {
-	int	i;
-
-	printf("  %d\n", printf("%1d", 0));
-	printf("  %d\n", ft_printf("%1d", 0));
-	return (0);
+	printf("\n%d\n", 1);
 }

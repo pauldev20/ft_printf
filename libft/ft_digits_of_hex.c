@@ -1,24 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   test.c                                             :+:      :+:    :+:   */
+/*   ft_digits_of_hex.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: pgeeser <pgeeser@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/04/26 12:52:03 by pgeeser           #+#    #+#             */
-/*   Updated: 2022/05/04 17:46:51 by pgeeser          ###   ########.fr       */
+/*   Created: 2022/05/04 15:13:04 by pgeeser           #+#    #+#             */
+/*   Updated: 2022/05/04 15:13:42 by pgeeser          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_printf.h"
-#include <stdio.h>
-#include <limits.h>
-
-int	main(void)
+int	ft_digits_of_hex(unsigned long long n)
 {
-	int	i;
+	int		digits;
 
-	printf("  %d\n", printf("%1d", 0));
-	printf("  %d\n", ft_printf("%1d", 0));
-	return (0);
+	digits = 0;
+	if (n == 0)
+		return (1);
+	while (n != 0)
+	{
+		n /= 16;
+		digits++;
+	}
+	return (digits);
 }
