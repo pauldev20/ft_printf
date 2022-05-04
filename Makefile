@@ -6,7 +6,7 @@
 #    By: pgeeser <pgeeser@student.42heilbronn.de    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/04/25 16:22:28 by pgeeser           #+#    #+#              #
-#    Updated: 2022/05/02 16:05:16 by pgeeser          ###   ########.fr        #
+#    Updated: 2022/05/03 22:29:00 by pgeeser          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,7 +14,7 @@ NAME = libftprintf.a
 CFLAGS = -Wall -Werror -Wextra
 CC = cc
 
-SRCS = ft_printf.c ft_printf_utils.c
+SRCS = ft_printf.c ft_printf_utils.c ft_printf_helpers.c
 
 OBJS = $(SRCS:.c=.o)
 
@@ -24,6 +24,8 @@ $(NAME): $(OBJS)
 	ar -rcs $(NAME) $(OBJS)
 
 all: $(NAME)
+
+bonus: all
 
 clean:
 	rm -rf $(OBJS)

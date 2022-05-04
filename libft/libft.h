@@ -6,7 +6,7 @@
 /*   By: pgeeser <pgeeser@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/06 15:59:22 by pgeeser           #+#    #+#             */
-/*   Updated: 2022/04/26 17:01:17 by pgeeser          ###   ########.fr       */
+/*   Updated: 2022/05/03 15:13:45 by pgeeser          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,7 @@ void	ft_lstiter(t_list *lst, void (*f)(void *));
 t_list	*ft_lstmap(t_list *lst, void *(*f)(void *), void (*del)(void *));
 
 /* Additional */
-int		ft_digits_of_int(unsigned long long n);
+int		ft_digits_of_int(long long n);
 int		ft_puthex_fd(unsigned long long nb, int fd, char charbegin);
 int		ft_putptr_fd(void *ptr, int fd);
 int		ft_putnbr_uns_fd(unsigned long nb, int fd);
