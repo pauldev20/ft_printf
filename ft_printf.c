@@ -6,7 +6,7 @@
 /*   By: pgeeser <pgeeser@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/25 16:19:52 by pgeeser           #+#    #+#             */
-/*   Updated: 2022/05/04 14:13:43 by pgeeser          ###   ########.fr       */
+/*   Updated: 2022/05/05 12:46:05 by pgeeser          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,10 +56,8 @@ t_args	parse_args(char **token)
 			rtn.space = 1;
 		if (**token == '+')
 			rtn.plus = 1;
-		if (**token == '0' && !rtn.zero)
-			rtn.zero = '0';
-		else if (!rtn.zero)
-			rtn.zero = ' ';
+		if (**token == '0' && rtn.zero == 0)
+			rtn.zero = 1;
 		if (**token == '-')
 			rtn.minus = 1;
 		if (**token == '.')
@@ -71,8 +69,8 @@ t_args	parse_args(char **token)
 		else if (ft_isdigit(**token) && (**token != '0'))
 		{
 			rtn.width = ft_atoi(*token);
-			if (ft_atoi(*token + 1) > 0)
-				*token += ft_digits_of_int(ft_atoi(*token + 1));
+			if (ft_atoi(*token) > 0)
+				*token += ft_digits_of_int(ft_atoi(*token)) - 1;
 		}
 		(*token)++;
 	}

@@ -6,30 +6,35 @@
 /*   By: pgeeser <pgeeser@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/03 22:17:33 by pgeeser           #+#    #+#             */
-/*   Updated: 2022/05/04 17:30:01 by pgeeser          ###   ########.fr       */
+/*   Updated: 2022/05/05 12:57:18 by pgeeser          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "./libft/libft.h"
 #include "ft_printf.h"
 
-int	puthex(unsigned long long a, char begin, int precision)
+int	puthex(unsigned long long a, char begin, int precision, int zerox)
 {
 	unsigned int	i;
 
 	i = 0;
-	while (precision-- > ft_digits_of_hex(a))
+	if (!precision && a == 0)
+		return (0);
+	if (zerox)
+		i += putchr('0');
+	if (zerox)
+		i += putchr(begin + 23);
+	while (precision-- > ft_digits_of_hex(a) + (zerox * 2))
 		i += putchr('0');
 	if (a > 1 && a >> 4 > 0)
-		i += puthex(a >> 4, begin, precision);
+		i += puthex(a >> 4, begin, 0, 0);
 	return (i + putchr((a & 0b1111) + ((a & 0b1111) < 10) * 48
 			+ ((a & 0b1111) > 9) * (begin - 10)));
 }
 
 int	putptr(void *ptr)
 {
-	putstr("0x", 2);
-	return (puthex((unsigned long long)ptr, 'a', -1) + 2);
+	return (puthex((unsigned long long)ptr, 'a', -1, 1));
 }
 
 int	putstr(char *s, int precision)
@@ -38,7 +43,7 @@ int	putstr(char *s, int precision)
 
 	i = 0;
 	if (!s)
-		return (putstr("(null)", 7));
+		return (putstr("(null)", precision));
 	while (s[i] && (precision == -1 || i < precision))
 		write(1, s + i++, 1);
 	return (i);
@@ -68,9 +73,11 @@ int	putnbr(long long nb, int precision, int sign, int space)
 		while (precision > ft_digits_of_int(nb) + v++)
 			i += putchr('0');
 	}
+	if (!precision && nb == 0)
+		return (0);
 	if (nb < 0)
 		nb *= -1;
 	if (nb / 10 > 0)
-		i += putnbr(nb / 10, 0, 0, 0);
+		i += putnbr(nb / 10, -1, 0, 0);
 	return (putchr(nb % 10 + '0') + i);
 }

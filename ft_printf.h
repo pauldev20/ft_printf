@@ -6,7 +6,7 @@
 /*   By: pgeeser <pgeeser@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/25 16:16:10 by pgeeser           #+#    #+#             */
-/*   Updated: 2022/05/04 15:49:17 by pgeeser          ###   ########.fr       */
+/*   Updated: 2022/05/05 12:25:34 by pgeeser          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ int	ft_printf(const char *str, ...);
 int	putstr(char *s, int precision);
 int	putchr(char c);
 int	putptr(void *ptr);
-int	puthex(unsigned long long a, char begin, int precision);
+int	puthex(unsigned long long a, char begin, int precision, int zerox);
 int	putnbr(long long nb, int precision, int sign, int space);
 
 int	printnbr(long long nb, t_args args);
