@@ -6,7 +6,7 @@
 /*   By: pgeeser <pgeeser@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/03 22:17:33 by pgeeser           #+#    #+#             */
-/*   Updated: 2022/05/05 12:57:18 by pgeeser          ###   ########.fr       */
+/*   Updated: 2022/05/05 18:24:32 by pgeeser          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,11 +30,6 @@ int	puthex(unsigned long long a, char begin, int precision, int zerox)
 		i += puthex(a >> 4, begin, 0, 0);
 	return (i + putchr((a & 0b1111) + ((a & 0b1111) < 10) * 48
 			+ ((a & 0b1111) > 9) * (begin - 10)));
-}
-
-int	putptr(void *ptr)
-{
-	return (puthex((unsigned long long)ptr, 'a', -1, 1));
 }
 
 int	putstr(char *s, int precision)
@@ -69,10 +64,8 @@ int	putnbr(long long nb, int precision, int sign, int space)
 	if (nb >= 0 && !sign && space)
 		i += putchr(' ');
 	if (precision && precision > ft_digits_of_int(nb))
-	{
 		while (precision > ft_digits_of_int(nb) + v++)
 			i += putchr('0');
-	}
 	if (!precision && nb == 0)
 		return (0);
 	if (nb < 0)

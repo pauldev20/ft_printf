@@ -6,7 +6,7 @@
 /*   By: pgeeser <pgeeser@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/25 16:19:52 by pgeeser           #+#    #+#             */
-/*   Updated: 2022/05/05 12:46:05 by pgeeser          ###   ########.fr       */
+/*   Updated: 2022/05/05 18:23:30 by pgeeser          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,8 +23,6 @@ int	is_token(char c)
 	else if (c == 'd' || c == 'i' || c == 'u')
 		return (1);
 	else if (c == 'x' || c == 'X' || c == '%')
-		return (1);
-	else if (c == '\0')
 		return (1);
 	return (0);
 }
@@ -43,38 +41,31 @@ t_args	init_args(void)
 	return (rtn);
 }
 
-t_args	parse_args(char **token)
+t_args	parse_args(char **token, t_args args)
 {
-	t_args	rtn;
-
-	rtn = init_args();
 	while (!is_token(**token))
 	{
 		if (**token == '#')
-			rtn.tag = 1;
+			args.tag = 1;
 		if (**token == ' ')
-			rtn.space = 1;
+			args.space = 1;
 		if (**token == '+')
-			rtn.plus = 1;
-		if (**token == '0' && rtn.zero == 0)
-			rtn.zero = 1;
+			args.plus = 1;
+		if (**token == '0' && args.zero == 0)
+			args.zero = 1;
 		if (**token == '-')
-			rtn.minus = 1;
+			args.minus = 1;
+		if (ft_isdigit(**token) && (**token != '0'))
+			args.width = ft_atoi(*token);
+		if (ft_isdigit(**token) && (**token != '0') && ft_atoi(*token) > 0)
+			*token += ft_digits_of_int(ft_atoi(*token)) - 1;
 		if (**token == '.')
-		{
-			rtn.prec = ft_atoi(*token + 1);
-			if (ft_atoi(*token + 1) > 0)
-				*token += ft_digits_of_int(ft_atoi(*token + 1));
-		}
-		else if (ft_isdigit(**token) && (**token != '0'))
-		{
-			rtn.width = ft_atoi(*token);
-			if (ft_atoi(*token) > 0)
-				*token += ft_digits_of_int(ft_atoi(*token)) - 1;
-		}
+			args.prec = ft_atoi(*token + 1);
+		if (**token == '.' && ft_atoi(*token + 1) > 0)
+			*token += ft_digits_of_int(ft_atoi(*token + 1));
 		(*token)++;
 	}
-	return (rtn);
+	return (args);
 }
 
 int	parse_token(char **token, va_list *ptr)
@@ -83,7 +74,7 @@ int	parse_token(char **token, va_list *ptr)
 	t_args	args;
 
 	i = 0;
-	args = parse_args(token);
+	args = parse_args(token, init_args());
 	if (**token == 'c')
 		i = printchar((char)va_arg(*ptr, int), args);
 	else if (**token == 's')
@@ -94,10 +85,8 @@ int	parse_token(char **token, va_list *ptr)
 		i = printnbr(va_arg(*ptr, int), args);
 	else if (**token == 'u')
 		i = printnbr(va_arg(*ptr, unsigned int), args);
-	else if (**token == 'x')
-		i = printhex(va_arg(*ptr, unsigned int), 'a', args);
-	else if (**token == 'X')
-		i = printhex(va_arg(*ptr, unsigned int), 'A', args);
+	else if (**token == 'x' || **token == 'X')
+		i = printhex(va_arg(*ptr, unsigned int), **token - 23, args);
 	else if (**token == '%')
 		i = putchr('%');
 	(*token)++;

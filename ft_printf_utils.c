@@ -6,7 +6,7 @@
 /*   By: pgeeser <pgeeser@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/02 12:32:29 by pgeeser           #+#    #+#             */
-/*   Updated: 2022/05/05 12:57:30 by pgeeser          ###   ########.fr       */
+/*   Updated: 2022/05/05 18:26:50 by pgeeser          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,7 @@ int	printchar(char c, t_args args)
 {
 	int	i;
 
+	i = 0;
 	if (args.minus)
 	{
 		i = putchr(c);
@@ -51,20 +52,17 @@ int	printchar(char c, t_args args)
 			putchr(' ');
 		return (i - 1);
 	}
-	else
-	{
-		i = 0;
-		while (1 + i++ < args.width)
-			putchr(' ');
-		i += putchr(c);
-		return (i - 1);
-	}
+	while (1 + i++ < args.width)
+		putchr(' ');
+	i += putchr(c);
+	return (i - 1);
 }
 
 int	printstr(char *s, t_args args)
 {
 	int	i;
 
+	i = 0;
 	if (args.minus)
 	{
 		i = putstr(s, args.prec);
@@ -72,17 +70,13 @@ int	printstr(char *s, t_args args)
 			putchr(' ');
 		return (i - 1);
 	}
-	else
-	{
-		i = 0;
-		while (s && ((int)ft_strlen(s) + i++ < args.width))
+	while (s && ((int)ft_strlen(s) + i++ < args.width))
+		putchr(' ');
+	if (!s)
+		while (6 + i++ < args.width)
 			putchr(' ');
-		if (!s)
-			while (6 + i++ < args.width)
-				putchr(' ');
-		i += putstr(s, args.prec);
-		return (i - 1);
-	}
+	i += putstr(s, args.prec);
+	return (i - 1);
 }
 
 int	printptr(void *ptr, t_args args)
@@ -92,18 +86,15 @@ int	printptr(void *ptr, t_args args)
 	i = 0;
 	if (args.minus)
 	{
-		i = putptr(ptr);
+		i = puthex((unsigned long long)ptr, 'a', -1, 1);
 		while (i++ < args.width)
 			putchr(' ');
 		return (i - 1);
 	}
-	else
-	{
-		while (ft_digits_of_hex((unsigned long long)ptr) + 2 + i++ < args.width)
-			putchr(' ');
-		i += putptr(ptr);
-		return (i - 1);
-	}
+	while (ft_digits_of_hex((unsigned long long)ptr) + 2 + i++ < args.width)
+		putchr(' ');
+	i += puthex((unsigned long long)ptr, 'a', -1, 1);
+	return (i - 1);
 }
 
 int	printhex(unsigned long long a, char begin, t_args args)
@@ -113,7 +104,7 @@ int	printhex(unsigned long long a, char begin, t_args args)
 	i = 0;
 	if (args.minus)
 	{
-		i += puthex(a, begin, args.prec, args.tag);
+		i = puthex(a, begin, args.prec, args.tag);
 		while (i++ < args.width)
 			putchr(' ');
 		return (i - 1);
