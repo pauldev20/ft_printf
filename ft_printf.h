@@ -6,12 +6,16 @@
 /*   By: pgeeser <pgeeser@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/25 16:16:10 by pgeeser           #+#    #+#             */
-/*   Updated: 2022/05/05 12:25:34 by pgeeser          ###   ########.fr       */
+/*   Updated: 2022/05/12 11:32:15 by pgeeser          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef FT_PRINTF_H
 # define FT_PRINTF_H
+
+# include <stdarg.h>
+# include <unistd.h>
+# include "./libft/libft.h"
 
 typedef struct s_args {
 	int	minus;

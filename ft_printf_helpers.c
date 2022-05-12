@@ -6,11 +6,10 @@
 /*   By: pgeeser <pgeeser@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/03 22:17:33 by pgeeser           #+#    #+#             */
-/*   Updated: 2022/05/05 18:24:32 by pgeeser          ###   ########.fr       */
+/*   Updated: 2022/05/12 11:32:25 by pgeeser          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "./libft/libft.h"
 #include "ft_printf.h"
 
 int	puthex(unsigned long long a, char begin, int precision, int zerox)

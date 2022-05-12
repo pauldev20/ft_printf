@@ -6,15 +6,11 @@
 /*   By: pgeeser <pgeeser@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/25 16:19:52 by pgeeser           #+#    #+#             */
-/*   Updated: 2022/05/05 18:23:30 by pgeeser          ###   ########.fr       */
+/*   Updated: 2022/05/12 11:31:58 by pgeeser          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
-#include "./libft/libft.h"
-#include <stdarg.h>
-
-#include <stdio.h>
 
 int	is_token(char c)
 {

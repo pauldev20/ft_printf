@@ -6,7 +6,7 @@
 #    By: pgeeser <pgeeser@student.42heilbronn.de    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/04/25 16:22:28 by pgeeser           #+#    #+#              #
-#    Updated: 2022/05/03 22:29:00 by pgeeser          ###   ########.fr        #
+#    Updated: 2022/05/12 11:37:25 by pgeeser          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -29,13 +29,15 @@ bonus: all
 
 clean:
 	rm -rf $(OBJS)
+	make clean -C ./libft/
 
 fclean: clean
 	rm -rf $(NAME)
+	make fclean -C ./libft/
 
 re: fclean all
 
 norm:
-	norminette *.c *.h
+	norminette $(SRCS) *.h
 
 .PHONY:	all clean fclean re norm

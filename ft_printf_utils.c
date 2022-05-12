@@ -6,15 +6,11 @@
 /*   By: pgeeser <pgeeser@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/02 12:32:29 by pgeeser           #+#    #+#             */
-/*   Updated: 2022/05/05 18:26:50 by pgeeser          ###   ########.fr       */
+/*   Updated: 2022/05/12 11:32:21 by pgeeser          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <unistd.h>
-#include "./libft/libft.h"
 #include "ft_printf.h"
-
-#include <stdio.h>
 
 int	printnbr(long long nb, t_args args)
 {
