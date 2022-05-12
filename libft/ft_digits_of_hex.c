@@ -5,10 +5,12 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: pgeeser <pgeeser@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/05/04 15:13:04 by pgeeser           #+#    #+#             */
-/*   Updated: 2022/05/04 15:13:42 by pgeeser          ###   ########.fr       */
+/*   Created: 2022/05/09 13:14:43 by pgeeser           #+#    #+#             */
+/*   Updated: 2022/05/09 13:14:57 by pgeeser          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
+#include "libft.h"
 
 int	ft_digits_of_hex(unsigned long long n)
 {

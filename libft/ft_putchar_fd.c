@@ -6,14 +6,13 @@
 /*   By: pgeeser <pgeeser@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/05 14:17:17 by pgeeser           #+#    #+#             */
-/*   Updated: 2022/04/26 16:12:29 by pgeeser          ###   ########.fr       */
+/*   Updated: 2022/04/08 00:06:37 by pgeeser          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-int	ft_putchar_fd(char c, int fd)
+void	ft_putchar_fd(char c, int fd)
 {
 	write(fd, &c, 1);
-	return (1);
 }

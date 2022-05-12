@@ -6,7 +6,7 @@
 /*   By: pgeeser <pgeeser@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/02 23:03:35 by pgeeser           #+#    #+#             */
-/*   Updated: 2022/04/05 16:18:05 by pgeeser          ###   ########.fr       */
+/*   Updated: 2022/05/12 11:45:27 by pgeeser          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,18 +14,18 @@
 
 char	*ft_strjoin(char const *s1, char const *s2)
 {
-	int		s1_len;
-	int		s2_len;
 	char	*ptr;
+	int		i;
 
 	if (!s1 || !s2)
 		return (NULL);
-	s1_len = ft_strlen(s1);
-	s2_len = ft_strlen(s2);
-	ptr = (char *)ft_calloc(s1_len + s2_len + 1, sizeof(char));
+	ptr = (char *)ft_calloc(ft_strlen(s1) + ft_strlen(s2) + 1, sizeof(char));
 	if (!ptr)
 		return (NULL);
-	ptr = ft_memcpy(ptr, s1, s1_len);
-	ptr = ft_memcpy(ptr + s1_len, s2, s2_len + 1);
-	return (ptr - s1_len);
+	i = 0;
+	while (*s1)
+		ptr[i++] = *s1++;
+	while (*s2)
+		ptr[i++] = *s2++;
+	return (ptr);
 }

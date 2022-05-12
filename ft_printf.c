@@ -6,7 +6,7 @@
 /*   By: pgeeser <pgeeser@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/25 16:19:52 by pgeeser           #+#    #+#             */
-/*   Updated: 2022/05/12 11:31:58 by pgeeser          ###   ########.fr       */
+/*   Updated: 2022/05/12 11:44:22 by pgeeser          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,7 +101,7 @@ int	ft_printf(const char *str, ...)
 		if (*str++ == '%')
 			i += parse_token((char **)&str, &args);
 		else
-			i += ft_putchar_fd(*(str - 1), 1);
+			i += putchr(*(str - 1));
 	}
 	va_end(args);
 	return (i);
