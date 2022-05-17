@@ -6,83 +6,29 @@
 /*   By: pgeeser <pgeeser@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/25 16:19:52 by pgeeser           #+#    #+#             */
-/*   Updated: 2022/05/12 14:53:52 by pgeeser          ###   ########.fr       */
+/*   Updated: 2022/05/17 15:03:08 by pgeeser          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-int	is_token(char c)
-{
-	if (c == 'c' || c == 's' || c == 'p')
-		return (1);
-	else if (c == 'd' || c == 'i' || c == 'u')
-		return (1);
-	else if (c == 'x' || c == 'X' || c == '%')
-		return (1);
-	return (0);
-}
-
-t_args	init_args(void)
-{
-	t_args	rtn;
-
-	rtn.minus = 0;
-	rtn.zero = 0;
-	rtn.prec = -1;
-	rtn.width = -1;
-	rtn.space = 0;
-	rtn.plus = 0;
-	rtn.tag = 0;
-	return (rtn);
-}
-
-t_args	parse_args(char **token, t_args args)
-{
-	while (!is_token(**token))
-	{
-		if (**token == '#')
-			args.tag = 1;
-		if (**token == ' ')
-			args.space = 1;
-		if (**token == '+')
-			args.plus = 1;
-		if (**token == '0' && args.zero == 0)
-			args.zero = 1;
-		if (**token == '-')
-			args.minus = 1;
-		if (ft_isdigit(**token) && (**token != '0'))
-			args.width = ft_atoi(*token);
-		if (ft_isdigit(**token) && (**token != '0') && ft_atoi(*token) > 0)
-			*token += ft_digits_of_int(ft_atoi(*token)) - 1;
-		if (**token == '.')
-			args.prec = ft_atoi(*token + 1);
-		if (**token == '.' && ft_atoi(*token + 1) > 0)
-			*token += ft_digits_of_int(ft_atoi(*token + 1));
-		(*token)++;
-	}
-	return (args);
-}
-
 int	parse_token(char **token, va_list *ptr)
 {
 	int		i;
-	t_args	args;
 
 	i = 0;
-	args = parse_args(token, init_args());
 	if (**token == 'c')
-		i = printchar((char)va_arg(*ptr, int), args);
+		i = putchr((char)va_arg(*ptr, int));
 	else if (**token == 's')
-		i = printstr(va_arg(*ptr, char *), args);
+		i = putstr(va_arg(*ptr, char *));
 	else if (**token == 'p')
-		i = printptr(va_arg(*ptr, void *), args);
+		i = puthex((unsigned long long)va_arg(*ptr, void *), 'a', 1);
 	else if (**token == 'd' || **token == 'i')
-		i = printnbr(va_arg(*ptr, int), args);
+		i = putnbr(va_arg(*ptr, int));
 	else if (**token == 'u')
-		i = printnbr(va_arg(*ptr, unsigned int), args);
+		i = putnbr(va_arg(*ptr, unsigned int));
 	else if (**token == 'x' || **token == 'X')
-		i = printhex(va_arg(*ptr, unsigned int), **token - 23, args);
+		i = puthex(va_arg(*ptr, unsigned int), **token - 23, 0);
 	else if (**token == '%')
 		i = putchr('%');
 	(*token)++;
