@@ -6,7 +6,7 @@
 /*   By: pgeeser <pgeeser@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/25 16:19:52 by pgeeser           #+#    #+#             */
-/*   Updated: 2022/05/17 15:03:08 by pgeeser          ###   ########.fr       */
+/*   Updated: 2022/05/20 10:12:26 by pgeeser          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 int	parse_token(char **token, va_list *ptr)
 {
-	int		i;
+	int	i;
 
 	i = 0;
 	if (**token == 'c')
