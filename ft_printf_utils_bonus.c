@@ -6,7 +6,7 @@
 /*   By: pgeeser <pgeeser@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/02 12:32:29 by pgeeser           #+#    #+#             */
-/*   Updated: 2022/05/20 13:25:39 by pgeeser          ###   ########.fr       */
+/*   Updated: 2022/05/20 13:40:31 by pgeeser          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,17 +88,17 @@ int	printptr(void *ptr, t_args args)
 	if (args.minus)
 	{
 		i += putstr("0x", 2);
-		if (args.prec > 0)
+		if (args.prec > 0 || ptr != NULL)
 			i += puthex((unsigned long long)ptr, 'a', -1, 0);
 		while (i++ < args.width)
 			putchr(' ');
 		return (i - 1);
 	}
-	while ((ft_digits_of_hex((unsigned long long)ptr) * (args.prec > 0))
-		+ 2 + i++ < args.width)
+	while ((ft_digits_of_hex((unsigned long long)ptr)
+			* (args.prec > 0 || ptr != NULL)) + 2 + i++ < args.width)
 		putchr(' ');
 	i += putstr("0x", 2);
-	if (args.prec > 0)
+	if (args.prec > 0 || ptr != NULL)
 		i += puthex((unsigned long long)ptr, 'a', -1, 0);
 	return (i - 1);
 }
