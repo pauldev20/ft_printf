@@ -6,7 +6,7 @@
 /*   By: pgeeser <pgeeser@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/25 16:16:10 by pgeeser           #+#    #+#             */
-/*   Updated: 2022/05/17 10:22:38 by pgeeser          ###   ########.fr       */
+/*   Updated: 2022/05/20 16:28:54 by pgeeser          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,6 @@ typedef struct s_args {
 int	ft_printf(const char *str, ...);
 int	putstr(char *s, int precision);
 int	putchr(char c);
-int	putptr(void *ptr);
 int	puthex(unsigned long long a, char begin, int precision, int zerox);
 int	putnbr(long long nb, int precision, int sign, int space);
 
