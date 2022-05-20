@@ -6,7 +6,7 @@
 /*   By: pgeeser <pgeeser@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/02 12:32:29 by pgeeser           #+#    #+#             */
-/*   Updated: 2022/05/20 10:10:01 by pgeeser          ###   ########.fr       */
+/*   Updated: 2022/05/20 13:25:39 by pgeeser          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,9 +71,11 @@ int	printstr(char *s, t_args args)
 			+ (args.prec * (args.prec < (int)ft_strlen(s) && args.prec > 0)))
 		+ i++ < args.width)
 		putchr(' ');
-	if (!s)
-		while ((int)ft_strlen("(null)") + i++ < args.width)
-			putchr(' ');
+	while (!s && (((int)ft_strlen("(null)") * (args.prec == -1 || args.prec
+					>= (int)ft_strlen("(null)"))) + (args.prec
+				* (args.prec < (int)ft_strlen("(null)") && args.prec > 0)))
+		+ i++ < args.width)
+		putchr(' ');
 	i += putstr(s, args.prec);
 	return (i - 1);
 }
@@ -85,14 +87,19 @@ int	printptr(void *ptr, t_args args)
 	i = 0;
 	if (args.minus)
 	{
-		i = puthex((unsigned long long)ptr, 'a', -1, 1);
+		i += putstr("0x", 2);
+		if (args.prec > 0)
+			i += puthex((unsigned long long)ptr, 'a', -1, 0);
 		while (i++ < args.width)
 			putchr(' ');
 		return (i - 1);
 	}
-	while (ft_digits_of_hex((unsigned long long)ptr) + 2 + i++ < args.width)
+	while ((ft_digits_of_hex((unsigned long long)ptr) * (args.prec > 0))
+		+ 2 + i++ < args.width)
 		putchr(' ');
-	i += puthex((unsigned long long)ptr, 'a', -1, 1);
+	i += putstr("0x", 2);
+	if (args.prec > 0)
+		i += puthex((unsigned long long)ptr, 'a', -1, 0);
 	return (i - 1);
 }
 

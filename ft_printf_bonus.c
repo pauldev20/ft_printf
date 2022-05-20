@@ -6,7 +6,7 @@
 /*   By: pgeeser <pgeeser@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/25 16:19:52 by pgeeser           #+#    #+#             */
-/*   Updated: 2022/05/17 10:54:04 by pgeeser          ###   ########.fr       */
+/*   Updated: 2022/05/20 13:10:18 by pgeeser          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,13 +47,15 @@ t_args	parse_args(char **token, t_args args)
 			args.space = 1;
 		if (**token == '+')
 			args.plus = 1;
-		if (**token == '0' && args.zero == 0)
+		if (**token == '0' && args.zero == 0
+			&& args.width == -1 && args.prec == -1)
 			args.zero = 1;
-		if (**token == '-')
+		if (**token == '-' && args.width == -1 && args.prec == -1)
 			args.minus = 1;
-		if (ft_isdigit(**token) && (**token != '0'))
+		if (ft_isdigit(**token) && (**token != '0') && args.prec == -1)
 			args.width = ft_atoi(*token);
-		if (ft_isdigit(**token) && (**token != '0') && ft_atoi(*token) > 0)
+		if (ft_isdigit(**token) && (**token != '0')
+			&& ft_atoi(*token) > 0 && args.prec == -1)
 			*token += ft_digits_of_int(ft_atoi(*token)) - 1;
 		if (**token == '.')
 			args.prec = ft_atoi(*token + 1);
