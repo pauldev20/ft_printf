@@ -6,7 +6,7 @@
 #    By: pgeeser <pgeeser@student.42heilbronn.de    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/04/25 16:22:28 by pgeeser           #+#    #+#              #
-#    Updated: 2022/05/17 10:28:11 by pgeeser          ###   ########.fr        #
+#    Updated: 2022/05/20 10:20:10 by pgeeser          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -45,4 +45,4 @@ re: fclean all
 norm:
 	norminette $(SRCS) $(BONUS_SRCS) *.h
 
-.PHONY:	all clean fclean re norm
+.PHONY:	all bonus clean fclean re norm
