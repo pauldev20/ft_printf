@@ -6,7 +6,7 @@
 /*   By: pgeeser <pgeeser@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/02 12:32:29 by pgeeser           #+#    #+#             */
-/*   Updated: 2022/05/17 15:07:53 by pgeeser          ###   ########.fr       */
+/*   Updated: 2022/05/20 10:10:01 by pgeeser          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,7 +80,7 @@ int	printstr(char *s, t_args args)
 
 int	printptr(void *ptr, t_args args)
 {
-	int					i;
+	int	i;
 
 	i = 0;
 	if (args.minus)
@@ -98,7 +98,7 @@ int	printptr(void *ptr, t_args args)
 
 int	printhex(unsigned long long a, char begin, t_args args)
 {
-	int					i;
+	int	i;
 
 	i = 0;
 	if (args.minus)
